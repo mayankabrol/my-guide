@@ -1,0 +1,56 @@
+//Since our created class in the code of nextpalindrome itself contains the main method for ec=xecution, we can test the test cases there only,otherwise test cases can be executed in a different java file also.
+//But, here we can do the testing using main function only.
+//While in the test cases we can insert many possible combinations of 't' and the possible inputs.
+//The values to be tested for t are -1,0,1,2,3,10 and so on.
+//The values to be tested for the other inputs can range from 0,1,2,10,100000000 and so on.
+//Either we can simply write down the test cases in another file.
+//Also, in other file we don't need to create references of the main class here.
+//Since, all the methods present in the class are static we can simply use the Classname to call the static functions and get the outputs.
+
+package palindromefinder;
+class tester{
+public static tester(){
+
+String str="0";
+int[] res=findnextpalin(str);
+			String result="";
+			for(int i=0;i<res.length;i++)
+				System.out.print(res[i]);
+				result.concat(Integer.toString(res[i]));
+			System.out.print(result);
+			System.out.println(" ");
+      
+
+
+String str="1";
+int[] res=findnextpalin(str);
+			String result="";
+			for(int i=0;i<res.length;i++)
+				System.out.print(res[i]);
+				result.concat(Integer.toString(res[i]));
+			System.out.print(result);
+			System.out.println(" ");
+      
+String str="9";
+int[] res=findnextpalin(str);
+			String result="";
+			for(int i=0;i<res.length;i++)
+				System.out.print(res[i]);
+				result.concat(Integer.toString(res[i]));
+			System.out.print(result);
+			System.out.println(" ");   
+      
+String str="1000000";
+int[] res=findnextpalin(str);
+			String result="";
+			for(int i=0;i<res.length;i++)
+				System.out.print(res[i]);
+				result.concat(Integer.toString(res[i]));
+			System.out.print(result);
+			System.out.println(" ");      
+      
+}
+}
+
+
+//Similary many more test cases can be added
