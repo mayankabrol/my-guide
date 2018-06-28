@@ -1,0 +1,127 @@
+package palindromefinder;
+
+import java.io.*;
+import java.util.*;
+
+public class palindrome {
+	public static boolean alldigit9(int num[],int n) {
+		for(int i=0;i<n;i++) {
+			if(num[i]!=9)
+				return false;
+		}
+		return true;
+	}
+	
+	public static int[] findnextpalin(String str) {
+		int len=str.length();
+		int[] arr=new int[len];
+		for(int i=0;i<str.length();i++) {
+			arr[i]=Integer.parseInt(str.substring(i,i+1));
+		}
+		int lenarr=arr.length;
+//		System.out.println(lenarr);
+		//Case 1 when all the digits were 9 in the given number
+		if(alldigit9(arr,lenarr)) {
+			int[] result=new int[lenarr+1];
+//			System.out.println("hello if");
+			result[0]=1;
+			for(int m=1;m<result.length;m++) {
+				result[m]=0;
+			}
+		return result;
+		}
+		//other cases when the given number is different 
+		else {
+//			System.out.println("hello else");
+			int middle=lenarr/2;
+			//now we need 2 counters to compare right and left side of the number
+			int c1=middle-1;
+			int c2;
+			
+//			System.out.println("hello else 2");
+			if(lenarr%2==0)
+				c2=middle;
+			else
+				c2=middle+1;
+			boolean leftissmaller=false;
+			
+			//move the counters until we encounter different digits
+			while(c1>=0 && arr[c1]==arr[c2]) {
+				c1--;
+				c2++;
+			}
+			//now if either the digit at left counter is smaller than right one 
+			//or c1 has reached the limit
+//			System.out.println("hello else 3");
+			if (c1 < 0 || arr[c1] < arr[c2]) 
+	        {
+	            //it is said true bcoz in the both cases, middle element 
+				//has to be incremented
+				leftissmaller = true;
+	        }
+//			System.out.println(leftissmaller);
+			//now if c1>0 i.e. the given number was not a palindrome 
+//			System.out.println("hello else 4");
+			while (c1 >= 0) 
+	        {
+	            arr[c2++] = arr[c1--];
+	        }
+			
+			// now to increment the middle number and even associate the carry
+			//to the sorrounding digits
+			
+			 if (leftissmaller) 
+		        {
+//				 System.out.println("hello else imp1");   
+				 int carry = 1;
+		         
+		            // If there are odd digits, then increment
+		            // the middle digit and store the carry
+		            if (lenarr % 2 == 1) {
+		                arr[middle] += 1;
+		                carry = arr[middle] / 10;
+		                arr[middle] %= 10;
+		            }
+		            c1 = middle - 1;
+//		            System.out.println("hello else imp2");
+		            if(lenarr%2==0)
+						c2=middle;
+					else
+						c2=middle+1;
+		            
+		             
+		            while (c1 >= 0) 
+		            {
+		                arr[c1] = arr[c1] + carry;
+		                carry = arr[c1] / 10;
+		                arr[c1] %= 10;
+//		                System.out.println("hello else imp 3");
+		                arr[c2] = arr[c1];
+		                c1--;
+		                c2++;
+		            }
+		 
+		        }
+			
+			
+			return arr;
+			}
+	}
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		int t=s.nextInt();
+		
+//		
+		while(t>0) {
+			String str=s.next();
+			int[] res=findnextpalin(str);
+//			String result="";
+			for(int i=0;i<res.length;i++)
+				System.out.print(res[i]);
+//				result.concat(Integer.toString(res[i]));
+//			System.out.print(result);
+			System.out.println(" ");
+			t--;
+		}
+	}
+}
